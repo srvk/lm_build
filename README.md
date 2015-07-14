@@ -2,8 +2,7 @@
 ## Adapting Your Own Language Model ##
 
 When you download and unzip this file into a Kaldi experiment like `…/kaldi-trunk/egs/tedlium/s5` you get a folder `lm_build/` with tools and\
- examples of how to adapt and train a language model based on your own training text file. The [README](https://bitbucket.org/srvk/kitchen-sa\
-ndbox/wiki/VagrantMachines/KaldiLmBuild/README.txt) in that folder gives you an example of how to use the resulting language model files as i\
+ examples of how to adapt and train a language model based on your own training text file. The [README](https://github.com/srvk/Kaldi-LM-Build/blob/master/readme.txt) in that folder gives you an example of how to use the resulting language model files as i\
 nput to Kaldi experiments.
 
 There is a chance the system on which you’re running may not have the C++ compiler tools. To make sure it does, please give this command:
@@ -23,8 +22,7 @@ cd lm_build
 
 ```
 
-The output should look like this: [sample output](https://bitbucket.org/srvk/kitchen-sandbox/wiki/VagrantMachines/KaldiLmBuild/lm_build_outpu\
-t.txt).
+The output should look like this: [sample output](https://github.com/srvk/Kaldi-LM-Build/blob/master/lm_build_output.txt).
 
 The resulting language model data will appear in a folder beneath the target folder you specified when running the command `train_lms.sh`. Fo\
 r example, if you gave the command
