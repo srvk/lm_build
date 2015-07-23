@@ -5,7 +5,7 @@ When you download and unzip this file into a Kaldi experiment like `…/kaldi-tr
  examples of how to adapt and train a language model based on your own training text file. The [README](https://github.com/srvk/Kaldi-LM-Build/blob/master/readme.txt.md) in that folder gives you an example of how to use the resulting language model files as i\
 nput to Kaldi experiments.
 
-There is a chance the system on which you’re running may not have the C++ compiler tools. To make sure it does, please give this command:
+There is a chance the system on which you’re running may not have the C++ compiler tools. To make sure it does, please give this command: 
 
 `sudo apt-get install build-essential`
 
