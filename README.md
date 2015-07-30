@@ -6,6 +6,5 @@ a Kaldi language model based on your own text.
 http://speechkitchen.org/kaldi-language-model-building/
 
 ## Manifest
->readme.txt : a copy of the README from the experiment
-
->lm_build_output.txt.md: a sample of what to expect as output
+    readme.txt : a copy of the README from the experiment
+    lm_build_output.txt.md: a sample of what to expect as output
