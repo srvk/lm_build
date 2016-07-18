@@ -36,6 +36,8 @@ cat $train_txt | awk -v w=wordlist.txt \
   'BEGIN{while((getline<w)>0) v[$1]=1;} {for (i=1;i<=NF;i++) if ($i in v) printf $i" ";else printf "<UNK> ";print ""}'|sed 's/ $//g' \
   | gzip -c > $dir/train_nounk.gz
 
+# count word frequencies of no-unknowns training text concatenated
+# with wordlist.txt so each word appears at least once in unigram.counts
 gunzip -c $dir/train_nounk.gz | cat - wordlist.txt | \
   awk '{ for(x=1;x<=NF;x++) count[$x]++; } END{for(w in count){print count[w], w;}}' | \
  sort -nr > $dir/unigram.counts
@@ -45,6 +47,8 @@ cat $dir/unigram.counts  | awk '{print $2}' | get_word_map.pl "<s>" "</s>" "<UNK
 
 gunzip -c $dir/train_nounk.gz | awk -v wmap=$dir/word_map 'BEGIN{while((getline<wmap)>0)map[$1]=$2;}
   { for(n=1;n<=NF;n++) { printf map[$n]; if(n<NF){ printf " "; } else { print ""; }}}' | gzip -c >$dir/train.gz
+# Different format than train_nounk.gz, train.gz replaces each
+# word in train text with the corresponding symbol from word_map
 
 rm $dir/train_nounk.gz 
 
