@@ -2,6 +2,13 @@
 
 # This script trains LMs.
 
+if [ $# -ne 2 ]; then
+  echo "Usage: ./train_lms.sh example_txt local_lm"
+  echo "  where example_text is sentences one per line training text"
+  echo "  and local_lm is the output folder into which LM gets placed"
+  exit 1;
+fi
+
 train_txt=$1
 dir=$2
 
