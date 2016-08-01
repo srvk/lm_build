@@ -50,22 +50,24 @@ gunzip -c $dir/train_nounk.gz | awk -v wmap=$dir/word_map 'BEGIN{while((getline<
 # Different format than train_nounk.gz, train.gz replaces each
 # word in train text with the corresponding symbol from word_map
 
-rm $dir/train_nounk.gz 
+#rm $dir/train_nounk.gz 
 
 # Now train and prune the LM. Her we go.
 train_lm.sh --arpa --lmtype 3gram-mincount $dir
 prune_lm.sh --arpa 6.0 $dir/3gram-mincount/
 
+# This will be done later
+
 # Format the generated LM
-echo "Done with LM building. Now formatting LM to FST ..."
-cp -r lang_bd $dir/lang_test_bd_tgpr
+#echo "Done with LM building. Now formatting LM to FST ..."
+#cp -r lang_bd $dir/lang_test_bd_tgpr
 
-gunzip -c $dir/3gram-mincount/lm_pr6.0.gz | arpa2fst - | fstprint | \
-    utils/eps2disambig.pl | utils/s2eps.pl | fstcompile --isymbols=lang_bd/words.txt \
-    --osymbols=lang_bd/words.txt  --keep_isymbols=false --keep_osymbols=false | \
-    fstrmepsilon > $dir/lang_test_bd_tgpr/G.fst || exit 1;
+#gunzip -c $dir/3gram-mincount/lm_pr6.0.gz | arpa2fst - | fstprint | \
+#    utils/eps2disambig.pl | utils/s2eps.pl | fstcompile --isymbols=lang_bd/words.txt \
+#    --osymbols=lang_bd/words.txt  --keep_isymbols=false --keep_osymbols=false | \
+#    fstrmepsilon > $dir/lang_test_bd_tgpr/G.fst || exit 1;
 
-fstisstochastic $dir/lang_test_bd_tgpr/G.fst
+#fstisstochastic $dir/lang_test_bd_tgpr/G.fst
 
 exit 0
 
