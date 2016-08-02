@@ -21,7 +21,8 @@
 
 # required inputs: newwords.txt, example_txt
 
-dict=../db/cantab-TEDLIUM/cantab-TEDLIUM.dct
+#dict=../db/cantab-TEDLIUM/cantab-TEDLIUM.dct
+dict=TEDLIUM.152k.dic
 lm_folder=adapt_lm
 langdir=data/lang_phn
 
@@ -30,16 +31,16 @@ langdir=data/lang_phn
 # Get pronunciations from CMU lex tool (requires internet connectivity!)
 # the last bit fixes case: downcase word, leave phonemes upcased
 if [ -f newwords.txt ]; then
-  curl -s `curl -s -F "wordfile=@newwords.txt" http://www.speech.cs.cmu.edu/cgi-bin/tools/logios/lextool.pl | awk ' /DICT/ { print $3 } '` | sed 's/(.)//g' | awk '{printf tolower($1 " "); for (i=2; i<=NF; i++)  
+  curl -s `curl -s -F "wordfile=@newwords.txt" http://www.speech.cs.cmu.edu/cgi-bin/tools/logios/lextool.pl | awk ' /DICT/ { print $3 } '` | awk '{printf tolower($1 " "); for (i=2; i<=NF; i++)  
    printf ($i " "); print ""}' > newwords.dct
-  cat newwords.dct $dict | sort > newdict.dct
+  cat newwords.dct $dict | sed 's/(.)//g' | sort > newdict.dct
 else
   cp $dict newdict.dct
 fi
 
 # Construct the phoneme-based lexicon, output in data/local/dict_phn
 echo "Constructing the phoneme-based lexicon"
-../local/tedlium_prepare_phn_dict.sh --srcdict newdict.dct || exit 1;
+utils/prepare_phn_dict.sh --srcdict newdict.dct || exit 1;
 
 # Compile the lexicon and token FSTs
 echo "Compiling the lexicon and token FSTs"
@@ -51,7 +52,6 @@ echo "Compiling the lexicon and token FSTs"
 
 cat newdict.dct | awk '{print $1}' | sort | uniq > wordlist.txt
 
-cp $langdir/words.txt lang_bd
 # lingering data corrupts output, so clear first
 rm -rf $lm_folder
 . path.sh
