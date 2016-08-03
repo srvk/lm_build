@@ -25,6 +25,7 @@
 dict=TEDLIUM.152k.dic
 lm_folder=adapt_lm
 langdir=data/lang_phn
+train_txt=example_txt
 
 # Generate pronunciations for words in supplied text file "newwords.txt"
 
@@ -52,10 +53,17 @@ echo "Compiling the lexicon and token FSTs"
 
 cat newdict.dct | awk '{print $1}' | sort | uniq > wordlist.txt
 
+# pop out OOVs list from training text
+cat $train_txt | awk -v w=wordlist.txt \
+  'BEGIN{while((getline<w)>0) v[$1]=1;} {for (i=1;i<=NF;i++) if ($i in v); else printf $i;print ""}' \
+  | sed '/^$/d' | grep -v -e '[[:digit:]]' | grep -v -e '[[:punct:]]' | grep -e '[[:alnum:]]' | sort | uniq -c | sort -rn > oov-counts.txt
+# append words with >2 frequency to wordlist
+grep -v "      1" oov-counts.txt | awk '{print $2}' >> wordlist.txt
+
 # lingering data corrupts output, so clear first
 rm -rf $lm_folder
 . path.sh
-train_lms.sh example_txt $lm_folder
+train_lms.sh $train_txt $lm_folder
 
 # Compose the decoding graph but use the just-built ARPA LM
 echo "Finding OOV words in ARPA LM but not in our words.txt"
