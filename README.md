@@ -15,8 +15,9 @@ The new script `run_adapt.sh` helps make LM adaptation much easier now.
  *   Run the script `run_adapt.sh`. This will do several things, but the end result will be a new composed decoding graph TLG.fst in the output folder `data/lang_phn_test/`
  *   Point your [Eesen Transcriber](http://www.github.com/srvk/eesen-transcriber) setup to use the resulting graph, for example by setting this value in `/vagrant/Makefile.options`
 
-`GRAPH_DIR?=$(EESEN_ROOT)/asr_egs/tedlium/v2-30ms/lm_build/data/lang_phn_test`
+  `GRAPH_DIR?=$(EESEN_ROOT)/asr_egs/tedlium/v2-30ms/lm_build/data/lang_phn_test`
 
+### Adding your own pronunciations
 This process makes use of the [CMU Lexicon Tool](http://www.speech.cs.cmu.edu/tools/lextool.html) to generate dictionary entries with phonetic pronunciations for unseen words. These may not always be correct. An alternative approach (Method 3?) Add your own words and pronunciations directly to `TEDLIUM.152k.dic` first - perhaps pattern matching parts of pronunciations from similar words. It is also possible to have more than one pronunciation, e.g:
 ```
 zydeco Z AY D EH K OW
