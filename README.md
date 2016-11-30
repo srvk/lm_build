@@ -17,4 +17,9 @@ The new script `run_adapt.sh` helps make LM adaptation much easier now.
 
 `GRAPH_DIR?=$(EESEN_ROOT)/asr_egs/tedlium/v2-30ms/lm_build/data/lang_phn_test`
 
-This process makes use of the [CMU Lexicon Tool](http://www.speech.cs.cmu.edu/tools/lextool.html) to generate dictionary entries with phonetic pronunciations for unseen words. 
+This process makes use of the [CMU Lexicon Tool](http://www.speech.cs.cmu.edu/tools/lextool.html) to generate dictionary entries with phonetic pronunciations for unseen words. These may not always be correct. An alternative approach (Method 3?) Add your own words and pronunciations directly to `TEDLIUM.152k.dic` first - perhaps pattern matching parts of pronunciations from similar words. It is also possible to have more than one pronunciation, e.g:
+```
+zydeco Z AY D EH K OW
+zydeco(2) Z IH D AH K OW
+zydeco(3) Z AY D AH K OW
+```
