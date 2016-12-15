@@ -24,3 +24,8 @@ zydeco Z AY D EH K OW
 zydeco(2) Z IH D AH K OW
 zydeco(3) Z AY D AH K OW
 ```
+
+### FAQ
+[How some of the scripts work](http://speechkitchen.org/questions-and-answers-about-eesen-tedlium-fbank-lm-building/)  
+[Deterministic (tiny) LM Building](https://github.com/srvk/eesen-transcriber/issues/19)  
+[Adding Technical Words to Dictionary](https://github.com/srvk/eesen-transcriber/issues/18)
