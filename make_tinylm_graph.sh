@@ -37,9 +37,12 @@ oov_int=`grep $oov_word $langdir/words.txt | awk '{print $2}'`
 
 utils/sym2int.pl --map-oov $oov_int -f 2- $langdir/words.txt $1 > $dir/text_int 
 
-./training_trans_fst.py $dir/text_int | fstcompile | fstarcsort --sort_type=olabel > $dir/G.fst
+utils/training_trans_fst.py $dir/text_int | fstcompile | fstarcsort --sort_type=olabel > $dir/G.fst
 
-fsttablecompose ${langdir}/L.fst $dir/G.fst | fstdeterminizestar --use-log=true | \
+# this way gets stuck in a loop for some inputs
+#fsttablecompose ${langdir}/L.fst $dir/G.fst | fstdeterminizestar --use-log=true | \
+#	fstminimizeencoded | fstarcsort --sort_type=ilabel > $dir/LG.fst || exit 1;
+fsttablecompose ${langdir}/L.fst $dir/G.fst | fstdeterminize | \
 	fstminimizeencoded | fstarcsort --sort_type=ilabel > $dir/LG.fst || exit 1;
 
 fsttablecompose ${langdir}/T.fst $dir/LG.fst > $dir/TLG.fst || exit 1;
