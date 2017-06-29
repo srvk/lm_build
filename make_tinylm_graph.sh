@@ -35,9 +35,10 @@ done
 ## Create the decoding graph
 oov_int=`grep $oov_word $langdir/words.txt | awk '{print $2}'`
 
-utils/sym2int.pl --map-oov $oov_int -f 2- $langdir/words.txt $1 > $dir/text_int 
+#utils/sym2int.pl --map-oov $oov_int -f 2- $langdir/words.txt $1 > $dir/text_int 
+utils/sym2int.pl --map-oov $oov_int $langdir/words.txt $1 > $dir/text_int 
 
-utils/training_trans_fst.py $dir/text_int | fstcompile | fstarcsort --sort_type=olabel > $dir/G.fst
+utils/trans_fst.py $dir/text_int | fstcompile | fstarcsort --sort_type=olabel > $dir/G.fst
 
 # this way gets stuck in a loop for some inputs
 #fsttablecompose ${langdir}/L.fst $dir/G.fst | fstdeterminizestar --use-log=true | \
