@@ -1,7 +1,7 @@
 # Kaldi Language Model Building #
 ## Adapting Your Own Language Model ##
 
-[Instructions to learn about building a Kaldi language model based on your own text.](http://speechkitchen.org/kaldi-language-model-building/)
+[Instructions to learn about building a Kaldi language model based on your own text.](http://speech-kitchen.org/kaldi-language-model-building/)
 
 When you clone this code into a Kaldi experiment like …/kaldi-trunk/egs/tedlium/s5 you get a folder `lm_build/` with tools and examples of how to adapt and train a language model based on your own training text file.
 
@@ -26,7 +26,7 @@ zydeco(3) Z AY D AH K OW
 ```
 
 ### FAQ
-[How some of the scripts work](http://speechkitchen.org/questions-and-answers-about-eesen-tedlium-fbank-lm-building/)  
+[How some of the scripts work](http://speech-kitchen.org/questions-and-answers-about-eesen-tedlium-fbank-lm-building/)  
 [Deterministic (tiny) LM Building](https://github.com/srvk/eesen-transcriber/issues/19)  
 [Adding Technical Words to Dictionary](https://github.com/srvk/eesen-transcriber/issues/18)  
 [More Details About LM Building](https://github.com/srvk/srvk-eesen-offline-transcriber/issues/2)
